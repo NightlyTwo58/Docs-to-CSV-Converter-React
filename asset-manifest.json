@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/NightlyTwo58/Docs-to-CSV-Converter-React/static/css/main.df670814.css",
+    "main.js": "/NightlyTwo58/Docs-to-CSV-Converter-React/static/js/main.b393a9c7.js",
+    "index.html": "/NightlyTwo58/Docs-to-CSV-Converter-React/index.html",
+    "main.df670814.css.map": "/NightlyTwo58/Docs-to-CSV-Converter-React/static/css/main.df670814.css.map",
+    "main.b393a9c7.js.map": "/NightlyTwo58/Docs-to-CSV-Converter-React/static/js/main.b393a9c7.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.df670814.css",
+    "static/js/main.b393a9c7.js"
+  ]
+}
