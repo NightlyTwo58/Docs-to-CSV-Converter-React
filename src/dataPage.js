@@ -129,77 +129,81 @@ function DataPage({ title, csvFile, descriptions, goBack}) {
   };
 
   return (
-    <div className="dataPage">
-      <h1>{title}</h1>
-      {csvData.length > 0 && (
-        <>
-          <div className="sliderSection">
-            <label htmlFor="startDateSlider">Select Date Range:</label>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <span>{startDate ? startDate.toLocaleDateString() : ''}</span>
-              <input
-                type="range"
-                id="startDateSlider"
-                min={minDate ? minDate.getTime() : 0}
-                max={maxDate ? maxDate.getTime() : 0}
-                value={startDate ? startDate.getTime() : 0}
-                step={86400000}
-                onChange={handleStartDateChange}
-              />
-              <input
-                type="range"
-                id="endDateSlider"
-                min={minDate ? minDate.getTime() : 0}
-                max={maxDate ? maxDate.getTime() : 0}
-                value={endDate ? endDate.getTime() : 0}
-                step={86400000}
-                onChange={handleEndDateChange}
-              />
-              <span>{endDate ? endDate.toLocaleDateString() : ''}</span>
+    <div className="dataPageWrapper">
+      <div id="mainHeader">
+        <button onClick={goBack}>Back</button>
+        <h1 style={{ position: 'center' }}>{title}</h1>
+      </div>
+      <div className="dataPage">
+        {csvData.length > 0 && (
+          <>
+            <div className="pieSection">
+              <h2>Pie Chart</h2>
+              <canvas ref={pieCanvasRef}></canvas>
             </div>
-          </div>
 
-          <div className="pieSection">
-            <h2>Pie Chart</h2>
-            <canvas ref={pieCanvasRef}></canvas>
-          </div>
-
-          <div className="lineSection">
-            <h2>Line Graph</h2>
-            <canvas ref={lineCanvasRef}></canvas>
-            <div className="explanations">
-              {descriptions && descriptions.map((desc, idx) => <p key={idx}>{desc}</p>)}
+            <div className="sliderSection">
+              <label htmlFor="startDateSlider">Select Date Range:</label>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <span>{startDate ? startDate.toLocaleDateString() : ''}</span>
+                <input
+                  type="range"
+                  id="startDateSlider"
+                  min={minDate ? minDate.getTime() : 0}
+                  max={maxDate ? maxDate.getTime() : 0}
+                  value={startDate ? startDate.getTime() : 0}
+                  step={86400000}
+                  onChange={handleStartDateChange}
+                />
+                <input
+                  type="range"
+                  id="endDateSlider"
+                  min={minDate ? minDate.getTime() : 0}
+                  max={maxDate ? maxDate.getTime() : 0}
+                  value={endDate ? endDate.getTime() : 0}
+                  step={86400000}
+                  onChange={handleEndDateChange}
+                />
+                <span>{endDate ? endDate.toLocaleDateString() : ''}</span>
+              </div>
             </div>
-          </div>
 
-          <div className="csvSection">
-            <h2>CSV Output</h2>
-            <table>
-              <thead>
-                <tr>
-                  {csvData[0] && Object.keys(csvData[0]).map(key => <th key={key}>{key}</th>)}
-                </tr>
-              </thead>
-              <tbody>
-                  {csvData.map((row, idx) => (
-                      <tr key={idx}>
-                          {Object.values(row).map((val, i) => (
-                              <td key={i}>
-                                {
-                                  val instanceof Date
-                                    ? val.toDateString()
-                                    : (val != null ? val.toString() : '')
-                                }
-                              </td>
-                          ))}
-                      </tr>
-                  ))}
-              </tbody>
-            </table>
-          </div>
-        </>
-      )}
-      <button onClick={goBack}>Back</button>
+            <div className="lineSection">
+              <h2>Line Graph</h2>
+              <canvas ref={lineCanvasRef}></canvas>
+              <div className="explanations">
+                {descriptions && descriptions.map((desc, idx) => <p key={idx}>{desc}</p>)}
+              </div>
+            </div>
+
+            <div className="csvSection">
+              <h2>CSV Output</h2>
+              <table>
+                <thead>
+                  <tr>
+                    {csvData[0] && Object.keys(csvData[0]).map(key => <th key={key}>{key}</th>)}
+                  </tr>
+                </thead>
+                <tbody>
+                    {csvData.map((row, idx) => (
+                        <tr key={idx}>
+                            {Object.values(row).map((val, i) => (
+                                <td key={i}>
+                                  {
+                                    val instanceof Date
+                                      ? val.toDateString()
+                                      : (val != null ? val.toString() : '')
+                                  }
+                                </td>
+                            ))}
+                        </tr>
+                    ))}
+                </tbody>
+              </table>
+            </div>
+          </>
+        )}
+      </div>
     </div>
   );
 }
