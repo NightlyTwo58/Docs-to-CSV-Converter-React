@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './style.css';
 import DataPage from './dataPage.js';
+import CsvPage from './csvPage.js';
 
 function App() {
   const [page, setPage] = React.useState('menu');
 
   const goBack = () => setPage('menu');
+  const goBackElec = () => setPage('electoral');
+  const goBackParen = () => setPage('parental');
+  const goElecCSV = () => setPage('electoral_csv');
+  const goParenCSV = () => setPage('parental_csv');
 
   const partyDescriptions = [
         "SA (Socialist Alliance) (Academically Far-Left, Socially Left) A historical socialist/communist party that was the inspiration for the RLP. It declined in popularity because it was too idealistic, something the RLP rectified. It sees occasional resurgences when RLP policies get old.",
@@ -40,6 +45,7 @@ function App() {
           csvFile={`./output.csv`}
           descriptions={partyDescriptions}
           goBack={goBack}
+          goCSV={goElecCSV}
         />
       )}
 
@@ -49,6 +55,23 @@ function App() {
           csvFile={`./outputPar.csv`}
           descriptions={parentalDescriptions}
           goBack={goBack}
+          goCSV={goParenCSV}
+        />
+      )}
+
+      {page === 'electoral_csv' && (
+        <CsvPage
+          title="Electoral CSV Data"
+          csvFile={`./output.csv`}
+          goBack={goBackElec}
+        />
+      )}
+
+      {page === 'parental_csv' && (
+        <CsvPage
+          title="Parental Influence CSV Data"
+          csvFile={`./outputPar.csv`}
+          goBack={goBackParen}
         />
       )}
     </>
