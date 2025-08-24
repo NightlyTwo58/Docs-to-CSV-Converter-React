@@ -1,6 +1,7 @@
 {
   "name": "docs-to-csv-converter-react",
   "version": "0.1.0",
+  "homepage": "https://nightlytwo58.github.io/Docs-to-CSV-Converter-React/",
   "private": true,
   "dependencies": {
     "chart.js": "^4.4.1",
